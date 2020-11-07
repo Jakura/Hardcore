@@ -103,6 +103,7 @@ public class LebenShop implements Listener {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§bPea_Chick")) {
 					if (Bukkit.getPlayer("Pea_Chick") != null) {
 						openExtraLebenBuyInv(p, Bukkit.getPlayer("Pea_Chick"));
+						playername = "Pea_Chick";
 					} else {
 						p.sendMessage(main.pre + "§cDer Spieler ist nicht Online");
 					}
@@ -111,6 +112,7 @@ public class LebenShop implements Listener {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§bPixelPlayGamesHD")) {
 					if (Bukkit.getPlayer("PixelPlayGamesHD") != null) {
 						openExtraLebenBuyInv(p, Bukkit.getPlayer("PixelPlayGamesHD"));
+						playername = "PixelPlayGamesHD";
 					} else {
 						p.sendMessage(main.pre + "§cDer Spieler ist nicht Online");
 					}
@@ -119,6 +121,7 @@ public class LebenShop implements Listener {
 				if (e.getCurrentItem().getItemMeta().getDisplayName().equals("§bSepj0")) {
 					if (Bukkit.getPlayer("Sepj0") != null) {
 						openExtraLebenBuyInv(p, Bukkit.getPlayer("Sepj0"));
+						playername = "Sepj0";
 					} else {
 						p.sendMessage(main.pre + "§cDer Spieler ist nicht Online");
 					}
