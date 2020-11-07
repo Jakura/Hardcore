@@ -1,0 +1,11 @@
+name: Hardcore
+version: 1.2
+author: Jakura
+main: de.Jakura.Hardcore.Main.main
+api-version: 1.16
+
+commands:
+     elbuy:
+          description: Kaufe dir mit dias Extra Leben
+     elshop:
+          description: Kaufe dir mit dias Extra Leben
