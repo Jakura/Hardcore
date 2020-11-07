@@ -1,10 +1,11 @@
 package de.Jakura.Hardcore.Main;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +13,6 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.DisplaySlot;
 import org.bukkit.scoreboard.Objective;
@@ -22,14 +22,20 @@ public class main extends JavaPlugin implements Listener {
 
 	int sched;
 
-	String pre = ChatColor.translateAlternateColorCodes('&', getConfig().getString("Prefix"));
+	String pre = "§7[§6SCP§7]§r ";
 
 	String pfad = "Extra Leben.";
 
+	ArrayList<String> list = new ArrayList<String>();
+	
 	@Override
 	public void onEnable() {
-		Bukkit.getConsoleSender().sendMessage("§6Plugin version §a" + this.getDescription().getVersion() + " §ageladen.");
+		
 		loadConfig();
+		
+		
+		
+		Bukkit.getConsoleSender().sendMessage("§6Plugin version §a" + this.getDescription().getVersion() + " §ageladen.");
 		Bukkit.getPluginManager().registerEvents(this, this);
 		
 		new LebenShop(this);
@@ -69,7 +75,6 @@ public class main extends JavaPlugin implements Listener {
 
 	public void loadConfig() {
 		getConfig().options().copyDefaults(true);
-		getConfig().set("Prefix", "&7[&6SCP&7]&r ");
 		saveConfig();
 	}
 
@@ -171,13 +176,30 @@ public class main extends JavaPlugin implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
 		Player p = e.getPlayer();
-
-		e.setJoinMessage(pre + "§a" + p.getName() + " §eist dem Hardcore Server beigetreten!");
-
-		p.getInventory().addItem(new ItemStack(Material.DIAMOND, 64));
 		
-		p.sendMessage(pre
-				+ "§cAchtung du bist dem Hardcore Server beigetreten, wen du stirbst sind deine sachen Weg! Und du verlierst ein Extra Leben.");
+		list.add("{username} ist gerade dem Server beigetreten - glhf!");
+		list.add("{username} ist gerade dem Server beigetreten. Schnell, seht alle beschäftigt aus!");
+		list.add("Willkommen {username}! Wir hoffen du hast Pizza mitgebracht.");
+		list.add("{username} ist gerade dem Server beigetreten. Versteckt eure Bananen!");
+		list.add("{username} ist gerade aufgetaucht. Halt mein Bier.");
+		list.add("Ist es ein Vogel? Ist es ein Flugzeug? Ah nein, ist nur {username}. ");
+		list.add("Es ist {username}. Preiset die Sonne!");
+		list.add("{username} ist da. Party ist vorbei.");
+		list.add("Rosen sind rot, Veilchen sind blau, {username} riecht nach Kot.");
+
+
+		Random r = new Random();
+		String res = null;
+		res = list.get(r.nextInt(list.size()));
+		res = res.replace("{username}","§a" + p.getName() + "§e");
+		e.setJoinMessage("§e" + res);
+		
+
+		sendBoard(p);
+		p.sendMessage(pre + "§cAchtung! Du bist einem Hardcore-Server beigetreten."
+				+ " Stirbst du, verlierst du dein gesamtes Inventar."
+				+ " Ist dein letztes Leben aufgebraucht, wirst du von dem Spiel ausgeschlossen."
+				+ " Unter /elshop kannst du Leben für Diamanten kaufen.");
 
 		if (getConfig().getString(pfad + p.getName()) == null) {
 			createStandardConfig(p);
@@ -190,7 +212,7 @@ public class main extends JavaPlugin implements Listener {
 	public void onQuit(PlayerQuitEvent e) {
 		Player p = e.getPlayer();
 		
-		e.setQuitMessage(pre + "§a" + p.getName() + " §ehat den Hardcore Server verlassen! bis zum nächsten mal");
+		e.setQuitMessage(pre + "§c" + p.getName() + " §ehat den Hardcore Server verlassen! bis zum nächsten mal");
 	}
 
 	@EventHandler
