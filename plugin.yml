@@ -1,7 +1,8 @@
 name: Hardcore
-version: 1.4.2
+version: 1.5.1
 author: Jakura
 main: de.Jakura.Hardcore.Main.main
+website: https://github.com/Jakura/Hardcore
 api-version: 1.16
 
 commands:
