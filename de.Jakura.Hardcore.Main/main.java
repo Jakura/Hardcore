@@ -37,13 +37,11 @@ public class main extends JavaPlugin implements Listener {
 		
 		Bukkit.getOnlinePlayers().forEach(y -> new Methoden(this).update(y));
 	}
-
 	@Override
 	public void onDisable() {
 		Bukkit.getConsoleSender().sendMessage(pre + "§6Plugin version §e"
 		+ this.getDescription().getVersion() + " §cgestoppt.");
 	}
-
 	public int getHealth(Player p) {
 		return this.getConfig().getInt(pfad + p.getName());
 	}
@@ -62,18 +60,14 @@ public class main extends JavaPlugin implements Listener {
 		getCommand("elshop").setExecutor(new shop_CMD(this));
 	}
 	public void createStandardConfig(Player p) {
-
 		this.getConfig().addDefault(pfad + p.getName(), 1);
 		this.saveConfig();
 	}
-
 	public void setSpecConfig(Player p, boolean var) {
 		this.getConfig().set("SpecPlayer." + p.getName(), var);
 		this.saveConfig();
 	}
-
 	public boolean getSpecConfig(Player p) {
-
 		return this.getConfig().getBoolean("SpecPlayer." + p.getName());
 	}
 }
