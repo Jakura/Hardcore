@@ -60,7 +60,7 @@ public class main extends JavaPlugin implements Listener {
 				}
 			}
 
-		}, 20, 20);
+		}, 20*20, 20*20);
 
 	}
 
